@@ -195,6 +195,11 @@ public:
     // *******************************************
     Node *DeleteNode(Node *root, int data)
     {
+        if (root->data==data)
+        {
+            return helper(root);
+        }
+        
         Node *dummy = root;
         while (root != NULL)
         {
