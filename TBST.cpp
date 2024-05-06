@@ -1,3 +1,5 @@
+// PS  8 10 11 12
+
 #include <iostream>
 using namespace std;
 class Node
@@ -258,12 +260,13 @@ int main()
     cout << endl;
     cout<<"Preorder="; b.PreOrder();
     cout<<endl;
+
+
+
+    // delete
     Node *parent = NULL;
     Node *curr = b.root;
-
-
-
-    if (b.Search(10, parent, curr))
+   if (b.Search(10, parent, curr))
     {
         b.Delete(parent,curr);
     }
