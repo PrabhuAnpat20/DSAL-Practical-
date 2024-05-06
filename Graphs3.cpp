@@ -1,34 +1,66 @@
 #include <iostream>
-#include <vector>
 #include <climits>
-
+#define MAX_VERTICES 100
 using namespace std;
+class Node
+{
+    int data;
+    int weight;
+    Node *next;
 
+    Node(int data, int weight)
+    {
+        this->data = data;
+        this->weight = weight;
+        next = NULL;
+    }
+    friend class Graph;
+};
 class Graph
 {
-    int NumVertices;
-    vector<vector<pair<int, int>>> adj;
+    int V;
+    Node *adjList[MAX_VERTICES];
 
 public:
-    Graph(int nv)
+    Graph(int v)
     {
-        NumVertices = nv;
-        adj.resize(NumVertices);
+        V = v;
+        for (int i = 0; i < v; i++)
+        {
+            adjList[i] = NULL;
+        }
     }
-    void AddEdges(int src, int dest, int weight)
+    void AddEdge(int v, int u, int w)
     {
-        adj[src].push_back(make_pair(dest, weight));
-        adj[dest].push_back(make_pair(src, weight));
+        Node *newnode = new Node(v, w);
+        newnode->next = adjList[u];
+        adjList[u] = newnode;
+
+        newnode = new Node(u, w);
+        newnode->next = adjList[v];
+        adjList[v] = newnode;
     }
-
-    void PrimsMST()
+    void PrintAdjList()
     {
+        for (int i = 0; i < V; i++)
+        {
+            Node *temp = adjList[i];
+            cout << "node :" << i << "->";
+            while (temp != NULL)
+            {
+                cout << temp->data << "," << temp->weight << "->";
+                temp = temp->next;
+            }
+            cout << "x" << endl;
+        }
+    }
+    void Prims()
+    {
+        int key[V];
+        bool mst[V];
+        int parent[V];
 
-        int key[NumVertices];
-        bool mst[NumVertices];
-        int parent[NumVertices];
-
-        for (int i = 0; i < NumVertices; i++)
+        for (int i = 0; i < V; i++)
         {
             key[i] = INT_MAX;
             parent[i] = -1;
@@ -36,35 +68,36 @@ public:
         }
 
         key[0] = 0;
-
-        for (int i = 0; i < NumVertices; i++)
+        int u;
+        for (int i = 0; i < V; i++)
         {
-
             int mini = INT_MAX;
-            int u;
-            for (int v = 0; v < NumVertices; v++)
+            for (int i = 0; i < V; i++)
             {
-                if (mst[v] == false && key[v] < mini)
+                if (key[i] < mini && !mst[i])
                 {
-                    u = v;
-                    mini = key[v];
+                    u = i;
+                    mini = key[u];
                 }
             }
-
             mst[u] = true;
-            for (auto it : adj[u])
-            {
 
-                int v = it.first;
-                int w = it.second;
-                if (mst[v] == false && w < key[v])
+            Node *temp = adjList[u];
+            while (temp != NULL)
+            {
+                int v = temp->data;
+                int w = temp->weight;
+
+                if (key[v] > w && !mst[v])
                 {
-                    parent[v] = u;
                     key[v] = w;
+                    parent[v] = u;
                 }
+                temp = temp->next;
             }
         }
-        for (int i = 0; i < NumVertices; i++)
+
+        for (int i = 0; i < V; i++)
         {
             if (parent[i] != -1)
             {
@@ -73,7 +106,7 @@ public:
         }
 
         int minW = 0;
-        for (int i = 0; i < NumVertices; i++)
+        for (int i = 0; i < V; i++)
         {
             minW += key[i];
         }
@@ -91,10 +124,10 @@ int main()
     {
         int u, v, w;
         cin >> u >> v >> w;
-        G.AddEdges(u, v, w);
+        G.AddEdge(u, v, w);
     }
+    G.PrintAdjList();
     cout << "********** connect the phone lines as follows **********" << endl;
-    G.PrimsMST();
-
+    G.Prims();
     return 0;
 }
