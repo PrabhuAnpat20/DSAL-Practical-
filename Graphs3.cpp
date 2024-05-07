@@ -1,3 +1,5 @@
+// 25
+
 #include <iostream>
 #include <climits>
 #define MAX_VERTICES 100
