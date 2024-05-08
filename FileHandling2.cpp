@@ -72,6 +72,16 @@ public:
             cout << "Not found!" << endl;
         }
     }
+      void displayAll()
+    {
+        file.seekg(0, ios::beg);
+        Student s;
+        while (file.read((char *)&s, sizeof(Student)))
+        {
+            s.display();
+        }
+        file.clear();
+    }
    void Delete(int roll)
 {
     int hash = getHash(roll);
@@ -97,7 +107,7 @@ int main()
     int choice;
     char name[20];
     int roll;
-    DAFile file("demo3.dat");
+    DAFile file("stud.dat");
     while (true)
     {
         cout << "1 -> Add new record" << endl;
@@ -123,6 +133,10 @@ int main()
             cout << "Enter roll: ";
             cin >> roll;
             file.Delete(roll);
+            break;
+             case 4:
+            file.displayAll();
+            break;
         default:
             cout << "Invalid choice!" << endl;
         }

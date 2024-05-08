@@ -114,7 +114,7 @@ public:
 
 int main()
 {
-    // Create a graph with 4 vertices
+    
     Graph g(8);
 
     // Add edges

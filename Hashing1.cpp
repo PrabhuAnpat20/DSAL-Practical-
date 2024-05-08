@@ -1,3 +1,5 @@
+//  ps 14 16
+
 #include <iostream>
 #define size 10
 using namespace std;
@@ -35,8 +37,8 @@ public:
             hash += int(key[i]);
         }
         cout << hash << endl;
-        return hash % size;
-        // return  ((hash*3+5)+1)%size;
+        // return hash % size;
+        return  ((hash*3+5))%size;
     }
 
     void insert_without_replacement(string name, string num)
@@ -45,7 +47,10 @@ public:
 
         while (people[hash].name != " " || people[hash].name == name)
         {
-            hash = (hash + 1) % size;
+            // hash = (hash + 1) % size;
+    
+            hash=((hash*3+5)+1)%size;
+        
         }
         people[hash].name = name;
         people[hash].num = num;
@@ -71,7 +76,8 @@ public:
                 name = temp_name;
                 num = temp_num;
             }
-            hash = (hash + 1) % size;
+            // hash = (hash + 1) % size;
+            hash=((hash*3+5)+1)%size;
         }
         people[hash].name = name;
         people[hash].num = num;
@@ -87,8 +93,8 @@ public:
                 cout << "Contact Deleted!" << endl;
                 return;
             }
-            hash = (hash + 1) % size;
-             // hash=((hash*3+5)+1)%size;
+            // hash = (hash + 1) % size;
+             hash=((hash*3+5)+1)%size;
         }
         cout << "Contact Not Found!!" << endl;
     }
@@ -115,8 +121,8 @@ public:
                 cout << "Number: " << people[hash].num << endl;
                 return;
             }
-            hash = (hash + 1) % size;
-            // hash=((hash*3+5)+1)%size;
+            // hash = (hash + 1) % size;
+            hash=((hash*3+5)+1)%size;
         }
         cout << "Data Not Found!!" << endl;
         
@@ -137,14 +143,14 @@ int main()
     cout<<"********************************************"<<endl;
    Hash h2;
 
-    h2.insert_with_replacement("e", "545");
-    h2.insert_with_replacement("g", "54");
-    h2.insert_with_replacement("g", "4");
-    h2.insert_with_replacement("h", "100");
-    h2.display();
-    h2.search("h");
-    h2.delete_contact("h");
-    h2.insert_with_replacement("i", "101");
-    h2.display();
+    // h2.insert_with_replacement("e", "545");
+    // h2.insert_with_replacement("g", "54");
+    // h2.insert_with_replacement("g", "4");
+    // h2.insert_with_replacement("h", "100");
+    // h2.display();
+    // h2.search("h");
+    // h2.delete_contact("h");
+    // h2.insert_with_replacement("i", "101");
+    // h2.display();
     return 0;
 }

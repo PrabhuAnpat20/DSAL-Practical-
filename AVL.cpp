@@ -144,7 +144,7 @@ private:
         {
             node->right = rotateRight(node->right);
             return rotateLeft(node);
-            return (node);
+        
         }
         // LR
         if (balance > 1 && key > node->left->key)
@@ -216,11 +216,11 @@ int main()
             avl.Ascending();
 
             break;
-        case 3:
-            cout<<"word to search"<<endl;
-            cin>>key;
-            avl.SearchNode(key);
-            break;    
+        // case 3:
+        //     cout<<"word to search"<<endl;
+        //     cin>>key;
+        //     avl.SearchNode(key);
+        //     break;    
         default:
             cout << "Invalid Input!!" << endl;
             break;

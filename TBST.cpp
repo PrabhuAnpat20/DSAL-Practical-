@@ -139,7 +139,7 @@ public:
         {
             if (Curr->data == data)
             {
-                return true;
+                return true;  
             }
             else
             {
@@ -235,7 +235,7 @@ public:
             Delete(p,temp);
         }
         
-        
+  
     }
 };
 int main()
